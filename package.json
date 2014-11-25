@@ -7,5 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "livescript-loader": "^0.1.2",
+    "prelude-ls": "^1.1.1"
+  }
 }

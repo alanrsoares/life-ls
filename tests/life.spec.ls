@@ -1,7 +1,16 @@
+module.exports = ""
+
+require "bower_components/mocha/mocha.css"
+require "bower_components/mocha/mocha.js"
+require "bower_components/chai/chai.js"
+require "src/life.ls"
+
 mocha.setup 'bdd'
+
 expect = chai.expect
 
 describe "Conway's Game of Life" !->
+
   specify 'Should tell wether a cell dies or lives through the next generation #1' !->
     expect Life.isGoingToLive true, 2 .to .equal true
 
