@@ -11,5 +11,10 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "mocha": "~2.0.1",
+    "chai": "~1.10.0",
+    "sinon": "~1.12.1"
+  }
 }
