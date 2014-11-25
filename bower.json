@@ -1,0 +1,15 @@
+{
+  "name": "life-ls",
+  "version": "0.0.0",
+  "authors": [
+    "Alan R. Soares <alan.soares@xero.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
