@@ -44,7 +44,8 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"tests/life.spec.ls\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	(function webpackMissingModule() { throw new Error("Cannot find module \"/Users/alanrsoares/GitHub/life-js/bower.json\""); }());
+	(function webpackMissingModule() { throw new Error("Cannot find module \"clear\""); }());
 
 
 /***/ }

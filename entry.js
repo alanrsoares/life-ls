@@ -1,1 +1,1 @@
-require("tests/life.spec.ls");
+require("./tests/life.spec.ls");

@@ -1,26 +1,22 @@
-module.exports = ""
-
-require "bower_components/mocha/mocha.css"
-require "bower_components/mocha/mocha.js"
-require "bower_components/chai/chai.js"
-require "src/life.ls"
-
 mocha.setup 'bdd'
 
 expect = chai.expect
 
 describe "Conway's Game of Life" !->
 
-  specify 'Should tell wether a cell dies or lives through the next generation #1' !->
+  Life = require "../src/life.ls"
+  Cell = require "../src/cell.ls"
+
+  specify 'Should tell whether a cell dies or lives through the next generation #1' !->
     expect Life.isGoingToLive true, 2 .to .equal true
 
-  specify 'Should tell wether a cell dies or lives through the next generation #2' !->
+  specify 'Should tell whether a cell dies or lives through the next generation #2' !->
     expect Life.isGoingToLive true, 3 .to .equal true
 
-  specify 'Should tell wether a cell dies or lives through the next generation #3' !->
+  specify 'Should tell whether a cell dies or lives through the next generation #3' !->
     expect Life.isGoingToLive false, 3 .to .equal true
 
-  specify 'Should tell wether a cell dies or lives through the next generation #4' !->
+  specify 'Should tell whether a cell dies or lives through the next generation #4' !->
     expect Life.isGoingToLive false, 2 .to .equal false
 
   specify 'Should get the number of alive neighbours #1' !->
