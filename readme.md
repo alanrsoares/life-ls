@@ -14,3 +14,8 @@ webpack
 ```
 webpack-dev-server --progress --colors
 ```
+
+## Run tests on browser
+```
+http://localhost:8080/tests/runner.html
+```
