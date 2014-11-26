@@ -7,7 +7,7 @@
     "server": "gulp --require LiveScript",
     "build": "gulp build --require LiveScript",
     "build-dev": "gulp build-dev --require LiveScript",
-    "test": "gulp --require LiveScript test:unit"
+    "test": "gulp test --require LiveScript"
   },
   "author": "Alan R. Soares (@alanrsoares)",
   "license": "ISC",
