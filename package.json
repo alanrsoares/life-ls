@@ -4,14 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "gulp --require LiveScript",
+    "build": "gulp build --require LiveScript",
+    "build-dev": "gulp build-dev --require LiveScript",
+    "test": "gulp --require LiveScript test:unit"
   },
-  "author": "",
+  "author": "Alan R. Soares (@alanrsoares)",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "chai": "^1.10.0",
     "css-loader": "^0.9.0",
+    "gulp": "^3.8.10",
+    "gulp-mocha": "^2.0.0",
+    "gulp-util": "^3.0.1",
+    "gulp-webpack": "^1.1.0",
     "livescript-loader": "^0.1.2",
+    "mocha": "^2.0.1",
     "prelude-ls": "^1.1.1",
-    "style-loader": "^0.8.2"
+    "style-loader": "^0.8.2",
+    "webpack": "^1.4.13",
+    "webpack-dev-server": "^1.6.6"
   }
 }

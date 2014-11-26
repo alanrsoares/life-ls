@@ -1,5 +1,5 @@
+chai = require 'chai'
 mocha.setup 'bdd'
-
 expect = chai.expect
 
 describe "Conway's Game of Life" !->
