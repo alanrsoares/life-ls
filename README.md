@@ -7,12 +7,12 @@ bower install
 
 ## Build
 ```
-webpack
+npm run [build|build-dev]
 ```
 
 ## Run development server
 ```
-webpack-dev-server --progress --colors
+npm run server
 ```
 
 ## Run tests on browser
