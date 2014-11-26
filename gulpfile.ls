@@ -26,9 +26,10 @@ gulp.task 'webpack:build', (callback) ->
   myConfig.plugins = myConfig.plugins or []
   myConfig.plugins =
     # This has effect on the react lib size
-    myConfig.plugins.concat(
-    new webpack.DefinePlugin('process.env': NODE_ENV: JSON.stringify 'production'),
-    new webpack.optimize.DedupePlugin!, new webpack.optimize.UglifyJsPlugin!)
+    myConfig.plugins.concat
+      new webpack.DefinePlugin 'process.env': NODE_ENV: JSON.stringify 'production',
+      new webpack.optimize.DedupePlugin!,
+      new webpack.optimize.UglifyJsPlugin!
 
   # run webpack
   webpack myConfig, (err, stats) ->
@@ -43,7 +44,7 @@ myDevConfig.debug = true
 
 # create a single instance of the compiler to allow caching
 devCompiler = webpack myDevConfig
-gulp.task 'webpack:build-dev', (callback) ->
+gulp.task 'webpack:build-dev', ['test'], (callback) ->
   # run webpack
   devCompiler.run (err, stats) ->
     throw new gutil.PluginError('webpack:build-dev', err) if err
@@ -57,7 +58,8 @@ gulp.task 'webpack-dev-server', (callback) ->
   myConfig.debug = true
 
   # Start a webpack-dev-server
-  new WebpackDevServer(webpack(myConfig),
+  new WebpackDevServer(
+    webpack(myConfig),
     public-path: '/' + myConfig.output.public-path
     stats:
       colors: true
