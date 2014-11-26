@@ -1,10 +1,15 @@
 require! <[gulp webpack]>
 gutil = require('gulp-util')
+mocha = require('gulp-mocha')
 WebpackDevServer = require('webpack-dev-server')
 webpackConfig = require('./webpack.config.js')
 
 # The development server (the recommended option for development)
 gulp.task 'default', ['webpack-dev-server']
+
+gulp.task 'test', (callback) ->
+  gulp.src './tests/*.spec.ls'
+  .pipe mocha reporter: 'dot'
 
 # Build and watch cycle (another option for development)
 # Advantage: No server required, can run app from filesystem
@@ -19,7 +24,7 @@ gulp.task 'webpack:build', (callback) ->
   # modify some webpack config options
   myConfig = Object.create webpackConfig
   myConfig.plugins = myConfig.plugins or []
-  myConfig.plugins = 
+  myConfig.plugins =
     # This has effect on the react lib size
     myConfig.plugins.concat(
     new webpack.DefinePlugin('process.env': NODE_ENV: JSON.stringify 'production'),
@@ -53,7 +58,7 @@ gulp.task 'webpack-dev-server', (callback) ->
 
   # Start a webpack-dev-server
   new WebpackDevServer(webpack(myConfig),
-    publicPath: '/' + myConfig.output.publicPath
+    public-path: '/' + myConfig.output.public-path
     stats:
       colors: true
   ).listen 8080, 'localhost', (err) ->

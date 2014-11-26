@@ -1,6 +1,4 @@
-chai = require 'chai'
-mocha.setup 'bdd'
-expect = chai.expect
+expect = require 'chai' .expect
 
 describe "Conway's Game of Life" !->
 
@@ -77,6 +75,4 @@ describe "Conway's Game of Life" !->
       * 1 0 1
       * 0 1 0
     subject = Cell.nextGen seed
-    expect subject.toString() .to .equal expected.toString()
-
-mocha.run!
+    expect subject.toString! .to .equal expected.toString!
