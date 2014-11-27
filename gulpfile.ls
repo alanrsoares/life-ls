@@ -1,8 +1,8 @@
 require! <[gulp webpack]>
-gutil = require('gulp-util')
-mocha = require('gulp-mocha')
-WebpackDevServer = require('webpack-dev-server')
-webpackConfig = require('./webpack.config.js')
+gutil = require 'gulp-util'
+mocha = require 'gulp-mocha'
+WebpackDevServer = require 'webpack-dev-server'
+webpackConfig = require './webpack.config.js'
 
 # The development server (the recommended option for development)
 gulp.task 'default', ['webpack-dev-server']
@@ -15,12 +15,15 @@ gulp.task 'test', (callback) ->
 # Advantage: No server required, can run app from filesystem
 # Disadvantage: Requests are not blocked until bundle is available,
 #               can serve an old app on refresh
-gulp.task 'build-dev', ['webpack:build-dev'], ->
-  gulp.watch ['app/**/*'], ['webpack:build-dev']
+gulp.task 'build-dev' ['webpack:build-dev'] ->
+  gulp.watch <[
+                src/**/*
+                tests/**/*
+              ]> ['webpack:build-dev']
 
 # Production build
-gulp.task 'build', ['webpack:build']
-gulp.task 'webpack:build', (callback) ->
+gulp.task 'build' ['webpack:build']
+gulp.task 'webpack:build' (callback) ->
   # modify some webpack config options
   myConfig = Object.create webpackConfig
   myConfig.plugins = myConfig.plugins or []
@@ -32,7 +35,7 @@ gulp.task 'webpack:build', (callback) ->
       new webpack.optimize.UglifyJsPlugin!
 
   # run webpack
-  webpack myConfig, (err, stats) ->
+  webpack myConfig (err, stats) ->
     throw new gutil.PluginError('webpack:build', err) if err
     gutil.log '[webpack:build]', stats.toString(colors: true)
     callback!
@@ -44,14 +47,14 @@ myDevConfig.debug = true
 
 # create a single instance of the compiler to allow caching
 devCompiler = webpack myDevConfig
-gulp.task 'webpack:build-dev', ['test'], (callback) ->
+gulp.task 'webpack:build-dev' ['test'] (callback) ->
   # run webpack
   devCompiler.run (err, stats) ->
     throw new gutil.PluginError('webpack:build-dev', err) if err
-    gutil.log '[webpack:build-dev]', stats.toString(colors: true)
+    gutil.log '[webpack:build-dev]' stats.toString(colors: true)
     callback!
 
-gulp.task 'webpack-dev-server', (callback) ->
+gulp.task 'webpack-dev-server' (callback) ->
   # modify some webpack config options
   myConfig = Object.create webpackConfig
   myConfig.devtool = 'eval'
@@ -59,7 +62,7 @@ gulp.task 'webpack-dev-server', (callback) ->
 
   # Start a webpack-dev-server
   new WebpackDevServer(
-    webpack(myConfig),
+    webpack(myConfig)
     public-path: '/' + myConfig.output.public-path
     stats:
       colors: true
