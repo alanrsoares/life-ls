@@ -3,7 +3,7 @@ tail = (xs) -> xs.slice 1
 map = (fn, xs) -->
   | !xs or
     !xs.length => []
-  | otherwise  => [fn head xs] .concat map fn, tail xs
+  | otherwise  => [fn head xs] ++ map fn, tail xs
 fold = (fn, y, xs) -->
   | !xs or
     !xs.length => y
@@ -13,29 +13,29 @@ Life = require "./life.ls"
 
 module.exports =
   class Cell
-    getNeighbours = (grid, coords) ->
+    get-neighbours = (grid, coords) ->
       neighbours = []
       y = coords.y
       x = coords.x
-      prevRow = grid[y-1] or []
-      nextRow = grid[y+1] or []
+      prev = grid[y-1] or []
+      next = grid[y+1] or []
       [
-        prevRow[x-1], prevRow[x], prevRow[x+1],
-        nextRow[x-1], nextRow[x], nextRow[x+1],
+        prev[x-1], prev[x], prev[x+1],
+        next[x-1], next[x], next[x+1],
         grid[y][x-1], grid[y][x+1]
       ]
 
-    @getAliveNeighbours = (grid, coords) ->
-      neighbours = getNeighbours(grid, coords)
+    @get-alive-neighbours = (grid, coords) ->
+      neighbours = get-neighbours(grid, coords)
       reducer = (x, y) -> x += +!!y
       neighbours |> fold reducer, 0
 
-    @nextGen = (grid) ->
-      newGrid = []
+    @next-gen = (grid) ->
+      new-grid = []
       len = grid.length-1
       for y from 0 to len by 1
-        newGrid[y] = []
+        new-grid[y] = []
         for x from 0 to len by 1
-          aliveNeighbors = @getAliveNeighbours grid, {x, y}
-          newGrid[y][x] = +(Life.isGoingToLive grid[x][y], aliveNeighbors)
-      newGrid
+          alive-neighbours = @get-alive-neighbours grid, {x, y}
+          new-grid[y][x] = +(Life.is-going-to-live grid[x][y], alive-neighbours)
+      new-grid

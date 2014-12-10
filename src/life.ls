@@ -1,5 +1,5 @@
 module.exports =
   class Life
-    @isGoingToLive = (isAlive, aliveNeighbours) ->
-      | isAlive => aliveNeighbours >= 2 && aliveNeighbours <= 3
-      | _       => aliveNeighbours is 3
+    @is-going-to-live = (is-alive, alive-neighbours) ->
+      | is-alive => aliveNeighbours >= 2 && alive-neighbours <= 3
+      | _        => alive-neighbours is 3
