@@ -22,7 +22,7 @@ npm run server
 
 > [http://localhost:8080/tests/runner.html](http://localhost:8080/tests/runner.html)
 
-### Or run run them on console
+### Or just run them on console
 
 ```
 npm run test
