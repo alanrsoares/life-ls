@@ -1,11 +1,12 @@
 ## Install dependencies
 ```
-npm install -g webpack webpack-dev-server
+npm install -g webpack webpack-dev-server LiveScript
 npm install
 bower install
 ```
 
-## Build
+## Build it
+
 ```
 npm run [build|build-dev]
 ```
@@ -15,6 +16,14 @@ npm run [build|build-dev]
 npm run server
 ```
 
-## Run tests on browser
+## Test it
+
+### Run tests on browser
 
 > [http://localhost:8080/tests/runner.html](http://localhost:8080/tests/runner.html)
+
+### Or run run them on console
+
+```
+npm run test
+```
