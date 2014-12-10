@@ -1,5 +1,5 @@
 module.exports = do
-  entry: './entry.js'
+  entry: './entry.ls'
   output:
     path: __dirname + '/dist'
     filename: 'bundle.js'
