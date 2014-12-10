@@ -47,6 +47,9 @@ myDevConfig.debug = true
 
 # create a single instance of the compiler to allow caching
 devCompiler = webpack myDevConfig
+
+gulp.task 'webpack-build-dev' <[ test webpack:build-dev ]>
+
 gulp.task 'webpack:build-dev' ['test'] (callback) ->
   # run webpack
   devCompiler.run (err, stats) ->

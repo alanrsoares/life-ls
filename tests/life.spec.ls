@@ -55,24 +55,22 @@ describe "Conway's Game of Life" !->
       * 0 1 0
       * 0 1 0
     subject = Cell.nextGen seed
-    expect subject.toString() .to .equal expected.toString()
+    expect subject .to .deep .equal expected
 
   specify 'Should calculate the next generation for a given board #2' !->
     seed =
       * 0 1 0
       * 0 1 0
       * 0 1 0
-    subject = Cell.nextGen seed |> Cell.nextGen
-    expect subject.toString() .to .equal seed.toString()
+    subject = seed
+              |> Cell.nextGen
+              |> Cell.nextGen
+    expect subject .to .deep .equal seed
 
   specify 'Should calculate the next generation for a given board #3' !->
     seed =
       * 1 1 0
       * 1 0 1
       * 0 1 0
-    expected =
-      * 1 1 0
-      * 1 0 1
-      * 0 1 0
     subject = Cell.nextGen seed
-    expect subject.toString! .to .equal expected.toString!
+    expect subject .to .deep .equal seed
