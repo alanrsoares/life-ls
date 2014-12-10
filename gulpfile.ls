@@ -2,7 +2,7 @@ require! <[gulp webpack]>
 gutil = require 'gulp-util'
 mocha = require 'gulp-mocha'
 WebpackDevServer = require 'webpack-dev-server'
-webpackConfig = require './webpack.config.js'
+webpackConfig = require './webpack.config.ls'
 
 # The development server (the recommended option for development)
 gulp.task 'default', ['webpack-dev-server']
