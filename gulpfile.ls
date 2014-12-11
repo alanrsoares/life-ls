@@ -1,4 +1,4 @@
-require! <[gulp webpack webpack-dev-server]>
+require! <[ gulp webpack webpack-dev-server ]>
 webpack-config = require './webpack.config.ls'
 gutil = require 'gulp-util'
 mocha = require 'gulp-mocha'
@@ -28,8 +28,7 @@ gulp.task 'webpack:build' (callback) ->
   my-config.plugins = my-config.plugins or []
   my-config.plugins =
     # This has effect on the react lib size
-    my-config.plugins ++
-    [
+    my-config.plugins ++ [
       new webpack.DefinePlugin 'process.env': NODE_ENV: JSON.stringify 'production'
       new webpack.optimize.DedupePlugin!
       new webpack.optimize.UglifyJsPlugin!
