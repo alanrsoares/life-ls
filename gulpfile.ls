@@ -1,8 +1,7 @@
-require! <[gulp webpack]>
+require! <[gulp webpack webpack-dev-server]>
+webpack-config = require './webpack.config.ls'
 gutil = require 'gulp-util'
 mocha = require 'gulp-mocha'
-Webpack-dev-server = require 'webpack-dev-server'
-webpack-config = require './webpack.config.ls'
 
 # The development server (the recommended option for development)
 gulp.task 'default', ['webpack-dev-server']
@@ -30,13 +29,15 @@ gulp.task 'webpack:build' (callback) ->
   my-config.plugins =
     # This has effect on the react lib size
     my-config.plugins ++
-      new webpack.Define-plugin 'process.env': NODE_ENV: JSON.stringify 'production'
-      new webpack.optimize.Dedupe-plugin!
-      new webpack.optimize.Uglify-js-plugin!
+    [
+      new webpack.DefinePlugin 'process.env': NODE_ENV: JSON.stringify 'production'
+      new webpack.optimize.DedupePlugin!
+      new webpack.optimize.UglifyJsPlugin!
+    ]
 
   # run webpack
-  webpack my-config (err, stats) ->
-    throw new gutil.Plugin-error('webpack:build', err) if err
+  webpack my-config, (err, stats) ->
+    throw new gutil.PluginError('webpack:build', err) if err
     gutil.log '[webpack:build]', stats.to-string colors: true
     callback!
 
@@ -53,7 +54,7 @@ gulp.task 'webpack-build-dev' <[ test webpack:build-dev ]>
 gulp.task 'webpack:build-dev' ['test'] (callback) ->
   # run webpack
   dev-compiler.run (err, stats) ->
-    throw new gutil.Plugin-error('webpack:build-dev', err) if err
+    throw new gutil.PluginError('webpack:build-dev', err) if err
     gutil.log '[webpack:build-dev]' stats.to-string colors: tru
     callback!
 
@@ -64,11 +65,11 @@ gulp.task 'webpack-dev-server' (callback) ->
   my-config.debug = true
 
   # Start a webpack-dev-server
-  new Webpack-dev-server(
+  new webpack-dev-server(
     webpack my-config
     public-path: '/' + my-config.output.public-path
     stats:
       colors: true
   ).listen 8080, 'localhost', (err) ->
-    throw new gutil.Plugin-error('webpack-dev-server', err) if err
+    throw new gutil.PluginError('webpack-dev-server', err) if err
     gutil.log '[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html'
