@@ -1,14 +1,12 @@
-require! <[ gulp webpack webpack-dev-server ]>
+require! <[ gulp gulp-util gulp-mocha webpack webpack-dev-server ]>
 webpack-config = require './webpack.config.ls'
-gutil = require 'gulp-util'
-mocha = require 'gulp-mocha'
 
 # The development server (the recommended option for development)
 gulp.task 'default', ['webpack-dev-server']
 
 gulp.task 'test', (callback) ->
   gulp.src './tests/*.spec.ls'
-  .pipe mocha reporter: 'dot'
+  .pipe gulp-mocha reporter: 'dot'
 
 # Build and watch cycle (another option for development)
 # Advantage: No server required, can run app from filesystem
@@ -36,8 +34,8 @@ gulp.task 'webpack:build' (callback) ->
 
   # run webpack
   webpack my-config, (err, stats) ->
-    throw new gutil.PluginError('webpack:build', err) if err
-    gutil.log '[webpack:build]', stats.to-string colors: true
+    throw new gulp-util.PluginError('webpack:build', err) if err
+    gulp-util.log '[webpack:build]', stats.to-string colors: true
     callback!
 
 # modify some webpack config options
@@ -53,8 +51,8 @@ gulp.task 'webpack-build-dev' <[ test webpack:build-dev ]>
 gulp.task 'webpack:build-dev' ['test'] (callback) ->
   # run webpack
   dev-compiler.run (err, stats) ->
-    throw new gutil.PluginError('webpack:build-dev', err) if err
-    gutil.log '[webpack:build-dev]' stats.to-string colors: tru
+    throw new gulp-util.PluginError('webpack:build-dev', err) if err
+    gulp-util.log '[webpack:build-dev]' stats.to-string colors: tru
     callback!
 
 gulp.task 'webpack-dev-server' (callback) ->
@@ -70,5 +68,5 @@ gulp.task 'webpack-dev-server' (callback) ->
     stats:
       colors: true
   ).listen 8080, 'localhost', (err) ->
-    throw new gutil.PluginError('webpack-dev-server', err) if err
-    gutil.log '[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html'
+    throw new gulp-util.PluginError('webpack-dev-server', err) if err
+    gulp-util.log '[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html'
